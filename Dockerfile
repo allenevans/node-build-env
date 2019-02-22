@@ -5,3 +5,6 @@ RUN apt-get update && \
   apt-get clean && \
   # Global npm packages
   npm install -g concurrently lerna typescript serverless
+
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
+  sh get-docker.sh

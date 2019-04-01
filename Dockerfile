@@ -1,7 +1,17 @@
 FROM node:10-slim
 
 RUN apt-get update && \
-  apt-get install -y bzip2 libfontconfig libfreetype6 jq python build-essential git rsync curl && \
+  apt-get install -y \
+    build-essential \
+    bzip2 \
+    curl \
+    git \
+    jq \
+    libfontconfig \
+    libfreetype6 \
+    python \
+    rsync \
+    zip && \
   apt-get clean && \
   # Global npm packages
   npm install -g concurrently lerna typescript serverless

@@ -10,12 +10,23 @@ RUN apt-get update && \
     libfontconfig \
     libfreetype6 \
     python \
+    python3 \
+    python3-setuptools \
     rsync \
     zip && \
   apt-get clean && \
-  # Global npm packages
-  npm install -g concurrently lerna typescript serverless
+# AWS cli
+  easy_install3 pip && \
+  pip install awscli --upgrade && \
+# Global npm packages
+  npm install -g \
+    concurrently \
+    lerna \
+    serverless \
+    typescript
 
+# Install and configure docker, docker-compose and docker machine
+# ---------------------------------------------------------------
 RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
   sh get-docker.sh
 

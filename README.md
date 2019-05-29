@@ -4,5 +4,5 @@ A simple image based on the node 10 official images which provides an environmen
 
 ## Build
 ```bash
-docker build -f Dockerfile -t allenevans/node-build-env:10 -t allenevans/node-build-env:latest .
+docker build -f Dockerfile -t allenevans/node-build-env:12 -t allenevans/node-build-env:latest .
 ```

@@ -37,7 +37,7 @@ RUN base=https://github.com/docker/machine/releases/download/v0.16.1 && \
       curl -L $base/docker-machine-$(uname -s)-$(uname -m) > /tmp/docker-machine && \
       install /tmp/docker-machine /bin/docker-machine
 
-RUN curl -L "https://github.com/digitalocean/doctl/releases/download/v1.21.1/doctl-1.21.1-linux-amd64.tar.gz" | tar -xzv && \
+RUN curl -L "https://github.com/digitalocean/doctl/releases/download/v1.28.0/doctl-1.28.0-linux-amd64.tar.gz" | tar -xzv && \
     mv doctl /usr/local/bin/doctl
 
 COPY ./src /

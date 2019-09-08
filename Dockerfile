@@ -4,6 +4,7 @@ RUN apt-get update && \
   apt-get install -y \
     build-essential \
     bzip2 \
+    ca-certificates \
     curl \
     git \
     jq \
@@ -14,7 +15,10 @@ RUN apt-get update && \
     python3-setuptools \
     rsync \
     zip && \
+  curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
+  apt-get install -y --no-install-recommends git-lfs && \
   apt-get clean && \
+  rm -r /var/lib/apt/lists/* && \
 # AWS cli
   easy_install3 pip && \
   pip install awscli --upgrade && \

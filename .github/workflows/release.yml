@@ -1,0 +1,49 @@
+name: release
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: main
+          clean: true
+
+      - name: Config
+        run: |
+          echo "Release triggered by ${{github.actor}}"
+          echo "Commit ${{github.event.commits[0].message}}"
+          git config --global user.email "git-ci@techinity.com"
+          git config --global user.name "gitci"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Check Image Exists
+        id: image
+        run: docker pull allenevans/node-build-env.dockerfile:$(jq -r '.version' package.json) && echo "::set-output name=exists::true" || echo "Image can be published"
+
+      - name: Docker publish
+        if: steps.image.outputs.exists != 'true'
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker tag node-build-env allenevans/node-build-env:$(jq -r ".version" package.json)
+          docker tag node-build-env allenevans/node-build-env:latest
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker push allenevans/node-build-env:$(jq -r ".version" package.json)
+          docker push allenevans/node-build-env:latest

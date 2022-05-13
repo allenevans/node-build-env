@@ -1,0 +1,20 @@
+{
+  "name": "node-build-env",
+  "version": "16.15.0",
+  "description": "Self-hosted github action runner",
+  "author": "Allen Evans <allen@techinity.com>",
+  "private": true,
+  "homepage": "https://github.com/allenevans/node-build-env",
+  "bugs": {
+    "url": "https://github.com/allenevans/node-build-env/issues"
+  },
+  "license": "MIT",
+  "main": "node-build-env.dockerfile",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allenevans/node-build-env.git"
+  },
+  "scripts": {
+    "build": "docker build -f node-build-env.dockerfile --tag node-build-env:$(jq -r '.version' package.json) ."
+  }
+}

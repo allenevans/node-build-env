@@ -1,10 +1,7 @@
-FROM node:16-slim
+FROM node:16.15.0
 
 # https://github.com/docker/compose/releases
 ARG DOCKER_COMPOSE_VERSION=2.5.0
-
-# https://github.com/actions/runner/releases
-ARG GITHUB_RUNNER_VERSION=2.291.1
 
 # https://github.com/docker/machine/releases
 ARG DOCKER_MACHINE_VERSION=0.16.2
@@ -44,8 +41,7 @@ RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.d
   apt-get clean && \
   rm -r /var/lib/apt/lists/*;
 # Global npm packages
-RUN npm -v;\
-    npm install -g \
+RUN npm install -g \
         concurrently \
         lerna \
         npm \

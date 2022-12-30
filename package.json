@@ -1,6 +1,6 @@
 {
   "name": "node-build-env",
-  "version": "16.15.0",
+  "version": "16.19.0",
   "description": "Self-hosted github action runner",
   "author": "Allen Evans <allen@techinity.com>",
   "private": true,

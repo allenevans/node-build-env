@@ -1,6 +1,6 @@
 {
   "name": "node-build-env",
-  "version": "18.14.2",
+  "version": "18.15.0",
   "description": "Self-hosted github action runner",
   "author": "Allen Evans <allen@techinity.com>",
   "private": true,
@@ -15,6 +15,8 @@
     "url": "git+https://github.com/allenevans/node-build-env.git"
   },
   "scripts": {
-    "build": "docker build -f node-build-env.dockerfile --tag node-build-env:$(jq -r '.version' package.json) ."
+    "build": "npm run build:docker && npm run build:squash",
+    "build:docker": "docker build -f node-build-env.dockerfile --tag node-build-env:$(jq -r '.version' package.json)-full .",
+    "build:squash": "docker-squash -f 20 --tag node-build-env:$(jq -r '.version' package.json) -m \"$(jq -r '.name + \"@\" + .version' package.json)\" --cleanup node-build-env:$(jq -r '.version' package.json)-full"
   }
 }

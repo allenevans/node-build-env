@@ -20,7 +20,9 @@ jobs:
           clean: true
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          pip install docker-squash
 
       - name: Build
         run: npm run build

@@ -19,6 +19,11 @@ jobs:
           ref: master
           clean: true
 
+      - name: Clean checkout
+        run: |
+          for tag in `git tag -l`; do git tag -d $tag; done
+          git fetch && git fetch -t && git checkout ${{github.head_ref}}
+
       - name: Install dependencies
         run: |
           npm install

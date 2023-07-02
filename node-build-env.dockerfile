@@ -34,12 +34,13 @@ RUN apt-get update && \
     unzip \
     zip;
 
-RUN pip3 install awscli --upgrade;
+RUN pip3 install awscli --upgrade --break-system-packages;
 
 RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
   apt-get install -y --no-install-recommends git-lfs && \
   apt-get clean && \
   rm -r /var/lib/apt/lists/*;
+
 # Global npm packages
 RUN npm install -g \
       lerna \

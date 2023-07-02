@@ -1,13 +1,13 @@
-FROM node:18.15.0
+FROM node:18.16.1
 
 # https://github.com/docker/compose/releases
-ARG DOCKER_COMPOSE_VERSION=2.16.0
+ARG DOCKER_COMPOSE_VERSION=2.19.1
 
 # https://github.com/docker/machine/releases
 ARG DOCKER_MACHINE_VERSION=0.16.2
 
 # https://www.terraform.io/downloads.html
-ARG TERRAFORM_VERSION=1.4.0
+ARG TERRAFORM_VERSION=1.5.2
 
 RUN apt-get update && \
   apt-get install -y \
